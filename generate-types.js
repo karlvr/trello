@@ -31,6 +31,7 @@ const paramTypes = {
     'query': 'TrelloExtraParams',
     'requestMethod': 'string',
     'rotate': 'number',
+    'searchQuery': 'string',
     'top': 'number',
     'type': 'string',
     'url': 'string',
@@ -45,6 +46,7 @@ const returnTypes = {
     'getListsOnBoard': 'List[]',
     'getListsOnBoardByFilter': 'List[]',
     'getOrgBoards': 'Board[]',
+    'search': 'SearchResults',
 }
 
 lines
@@ -194,6 +196,17 @@ const footer = `    }
         idMember: string
         memberType: string
         unconfirmed: boolean
+    }
+
+    export interface SearchResults {
+        options: {
+            terms: string[]
+            modifiers: any[]
+            modelTypes: string[]
+            partial: boolean
+        }
+        boards?: Board[]
+        cards?: Card[]
     }
 
 }

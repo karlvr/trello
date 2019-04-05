@@ -1174,4 +1174,35 @@ describe('Trello', function () {
             restler.put.restore();
         });
     });
+
+    describe('search', function() {
+        var query;
+        var get;
+
+        beforeEach(function (done) {
+            sinon.stub(restler, 'get', function (uri, options) {
+                return {once: function (event, callback) {
+                    callback(null, null);
+                }};
+            });
+
+            trello.search('searchQuery', function () {
+                query = restler.get.args[0][1].query;
+                get = restler.get;
+                done();
+            });
+        });
+
+        it('should get to https://api.trello.com/1/search', function () {
+            get.should.have.been.calledWith('https://api.trello.com/1/search');
+        });
+
+        it('should include the query value', function () {
+            query.query.should.equal('searchQuery');
+        });
+
+        afterEach(function () {
+            restler.get.restore();
+        });
+    });
 });

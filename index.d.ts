@@ -195,6 +195,10 @@ declare module 'trello' {
         addDueDateToCard(cardId: string, dateValue: string, callback: TrelloCallback<any>): void
         addDueDateToCard(cardId: string, dateValue: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
         addDueDateToCard(cardId: string, dateValue: string, extraParams?: TrelloExtraParams): Promise<any>
+
+        search(searchQuery: string, callback: TrelloCallback<SearchResults>): void
+        search(searchQuery: string, extraParams: TrelloExtraParams, callback: TrelloCallback<SearchResults>): void
+        search(searchQuery: string, extraParams?: TrelloExtraParams): Promise<SearchResults>
     }
 
     /** https://developers.trello.com/v1.0/reference#board-object  */
@@ -286,6 +290,17 @@ declare module 'trello' {
         idMember: string
         memberType: string
         unconfirmed: boolean
+    }
+
+    export interface SearchResults {
+        options: {
+            terms: string[]
+            modifiers: any[]
+            modelTypes: string[]
+            partial: boolean
+        }
+        boards?: Board[]
+        cards?: Card[]
     }
 
 }
