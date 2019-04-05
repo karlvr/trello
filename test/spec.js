@@ -280,7 +280,7 @@ describe('Trello', function () {
 
     describe('getCardsOnListWithExtraParams', function () {
         var query;
-        var post;
+        var get;
 
         var testDate = new Date("2015/03/25");
         var extraParams = {before: testDate}
@@ -313,7 +313,7 @@ describe('Trello', function () {
 
     describe('getCardsOnList (with extra params)', function () {
         var query;
-        var post;
+        var get;
 
         var testDate = new Date("2015/03/25");
         var extraParams = {before: testDate}
@@ -346,7 +346,7 @@ describe('Trello', function () {
 
     describe('getCardsOnBoardWithExtraParams', function () {
         var query;
-        var post;
+        var get;
 
         var testDate = new Date("2015/03/25");
         var extraParams = {before: testDate}
@@ -379,7 +379,7 @@ describe('Trello', function () {
 
     describe('getCardsOnBoard (with extra params)', function () {
         var query;
-        var post;
+        var get;
 
         var testDate = new Date("2015/03/25");
         var extraParams = {before: testDate}
@@ -693,7 +693,7 @@ describe('Trello', function () {
 
     describe('addMemberToBoard', function () {
         var data;
-        var post;
+        var put;
 
         beforeEach(function (done) {
             sinon.stub(restler, 'put', function (uri, options) {
