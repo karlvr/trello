@@ -162,6 +162,7 @@ Trello.prototype.getCardsForList = function(listId, actions, extraParamsOrCallba
     var query = this.createQuery();
     if (actions)
         query.actions = actions;
+    
     query = applyExtraParams(extraParamsOrCallback, query)
     callback = extractCallback(extraParamsOrCallback, callback)
     return makeRequest(rest.get, this.uri + '/1/lists/' + listId + '/cards', {query: query}, callback);
@@ -257,14 +258,14 @@ Trello.prototype.getChecklistsOnCard = function (cardId, extraParamsOrCallback, 
     return makeRequest(rest.get, this.uri + '/1/cards/' + cardId + '/checklists', {query: query}, callback);
 };
 
-Trello.prototype.addItemToChecklist = function (checkListId, name, pos, extraParamsOrCallback, callback) {
+Trello.prototype.addItemToChecklist = function (checklistId, name, pos, extraParamsOrCallback, callback) {
     var query = this.createQuery();
     query.name = name;
     query.pos = pos;
 
     query = applyExtraParams(extraParamsOrCallback, query)
     callback = extractCallback(extraParamsOrCallback, callback)
-    return makeRequest(rest.post, this.uri + '/1/checklists/' + checkListId + '/checkitems', {query: query}, callback);
+    return makeRequest(rest.post, this.uri + '/1/checklists/' + checklistId + '/checkitems', {query: query}, callback);
 };
 
 Trello.prototype.updateCard = function (cardId, field, value, extraParamsOrCallback, callback) {
@@ -375,12 +376,12 @@ Trello.prototype.addWebhook = function (description, callbackUrl, idModel, extra
     return makeRequest(rest.post, this.uri + '/1/tokens/' + this.token + '/webhooks/', { data: data, query: query }, callback);
 };
 
-Trello.prototype.deleteWebhook = function (webHookId, extraParamsOrCallback, callback) {
+Trello.prototype.deleteWebhook = function (webhookId, extraParamsOrCallback, callback) {
     var query = this.createQuery();
 
     query = applyExtraParams(extraParamsOrCallback, query)
     callback = extractCallback(extraParamsOrCallback, callback)
-    return makeRequest(rest.del, this.uri + '/1/webhooks/' + webHookId, { query: query }, callback);
+    return makeRequest(rest.del, this.uri + '/1/webhooks/' + webhookId, { query: query }, callback);
 };
 
 Trello.prototype.getLabelsForBoard = function(boardId, extraParamsOrCallback, callback) {
