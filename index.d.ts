@@ -30,9 +30,9 @@ declare module 'trello' {
         getCard(boardId: string, cardId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
         getCard(boardId: string, cardId: string, extraParams?: TrelloExtraParams): Promise<any>
 
-        getCardsForList(listId: string, actions: string, callback: TrelloCallback<any>): void
-        getCardsForList(listId: string, actions: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
-        getCardsForList(listId: string, actions: string, extraParams?: TrelloExtraParams): Promise<any>
+        getCardsForList(listId: string, actions: string | undefined, callback: TrelloCallback<Card[]>): void
+        getCardsForList(listId: string, actions: string | undefined, extraParams: TrelloExtraParams, callback: TrelloCallback<Card[]>): void
+        getCardsForList(listId: string, actions: string | undefined, extraParams?: TrelloExtraParams): Promise<Card[]>
 
         renameList(listId: string, name: string, callback: TrelloCallback<any>): void
         renameList(listId: string, name: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
@@ -217,6 +217,7 @@ declare module 'trello' {
         memberships: Membership[]
     }
 
+    /* https://developers.trello.com/reference#list-object */
     export interface List {
         id: string
         name: string
@@ -225,6 +226,54 @@ declare module 'trello' {
         pos: number
         subscribed: boolean
     }
+
+    /* https://developers.trello.com/reference#card-object */
+    export interface Card {
+        id: string
+        badges: Badges
+        checkItemStates: any[]
+        closed: boolean
+        dateLastActivity: string
+        desc: string
+        descData: any
+        due?: string
+        dueComplete: boolean
+        idAttachmentCover?: string
+        idBoard: string
+        idChecklists: string[]
+        idLabels: string[]
+        idList: string
+        idMembers: string[]
+        idMembersVoted: string[]
+        idShort: number
+        labels: Label[]
+        manualCoverAttachment: boolean
+        name: string
+        pos: number
+        shortLink: string
+        shortUrl: string
+        subscribed: boolean
+        url: string
+        address: string
+        locationName: string
+        coordinates: Coordinates
+    }
+
+    export interface Badges {
+        votes: number
+        viewingMemberVoted: boolean
+        subscribed: boolean
+        fogbugz: string
+        checkItems: number
+        checkItemsChecked: number
+        comments: number
+        attachments: number
+        description: boolean
+        due: string | null
+        dueComplete: boolean
+    }
+
+    export type Coordinates = string | { latitude: number, longitude: number }
 
     export interface Label {
         id: string

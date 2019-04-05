@@ -6,7 +6,7 @@ const lines = js.split('\n')
 const result = []
 
 const paramTypes = {
-    'actions': 'string',
+    'actions': 'string | undefined',
     'boardId': 'string',
     'callbackUrl': 'string',
     'cardId': 'string',
@@ -41,6 +41,7 @@ const paramTypes = {
 
 const returnTypes = {
     'getBoards': 'Board[]',
+    'getCardsForList': 'Card[]',
     'getListsOnBoard': 'List[]',
     'getListsOnBoardByFilter': 'List[]',
     'getOrgBoards': 'Board[]',
@@ -124,6 +125,7 @@ const footer = `    }
         memberships: Membership[]
     }
 
+    /* https://developers.trello.com/reference#list-object */
     export interface List {
         id: string
         name: string
@@ -132,6 +134,54 @@ const footer = `    }
         pos: number
         subscribed: boolean
     }
+
+    /* https://developers.trello.com/reference#card-object */
+    export interface Card {
+        id: string
+        badges: Badges
+        checkItemStates: any[]
+        closed: boolean
+        dateLastActivity: string
+        desc: string
+        descData: any
+        due?: string
+        dueComplete: boolean
+        idAttachmentCover?: string
+        idBoard: string
+        idChecklists: string[]
+        idLabels: string[]
+        idList: string
+        idMembers: string[]
+        idMembersVoted: string[]
+        idShort: number
+        labels: Label[]
+        manualCoverAttachment: boolean
+        name: string
+        pos: number
+        shortLink: string
+        shortUrl: string
+        subscribed: boolean
+        url: string
+        address: string
+        locationName: string
+        coordinates: Coordinates
+    }
+
+    export interface Badges {
+        votes: number
+        viewingMemberVoted: boolean
+        subscribed: boolean
+        fogbugz: string
+        checkItems: number
+        checkItemsChecked: number
+        comments: number
+        attachments: number
+        description: boolean
+        due: string | null
+        dueComplete: boolean
+    }
+
+    export type Coordinates = string | { latitude: number, longitude: number }
 
     export interface Label {
         id: string
