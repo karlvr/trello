@@ -74,6 +74,7 @@ lines
         if (paramTypes[param]) {
             return `${param}: ${paramTypes[param]}`
         } else {
+            console.warn(`WARN: Using 'any' type for param '${param}'`)
             return `${param}: any`
         }
     })
