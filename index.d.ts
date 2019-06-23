@@ -77,6 +77,11 @@ declare module 'trello' {
         tags?: boolean
     }
 
+    interface GetBoardListsQueryParams extends NestedCardQueryParams {
+        filter?: 'all' | 'closed' | 'none' | 'open'
+        fields?: string
+    }
+
     interface GetMemberCardsQueryParams {
         filter?: 'all' | 'closed' | 'none' | 'open' | 'visible'
     }
@@ -203,8 +208,8 @@ declare module 'trello' {
         getList(listId: string, extraParams?: TrelloExtraParams): Promise<List>
 
         getListsOnBoard(boardId: string, callback: TrelloCallback<List[]>): void
-        getListsOnBoard(boardId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<List[]>): void
-        getListsOnBoard(boardId: string, extraParams?: TrelloExtraParams): Promise<List[]>
+        getListsOnBoard(boardId: string, extraParams: GetBoardListsQueryParams, callback: TrelloCallback<List[]>): void
+        getListsOnBoard(boardId: string, extraParams?: GetBoardListsQueryParams): Promise<List[]>
 
         getListsOnBoardByFilter(boardId: string, filter: string, callback: TrelloCallback<List[]>): void
         getListsOnBoardByFilter(boardId: string, filter: string, extraParams: TrelloExtraParams, callback: TrelloCallback<List[]>): void

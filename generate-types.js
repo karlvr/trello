@@ -54,6 +54,7 @@ const returnTypes = {
 
 const extraParamsTypes = {
     'getBoard': 'GetBoardQueryParams',
+    'getListsOnBoard': 'GetBoardListsQueryParams',
     'getMemberCards': 'GetMemberCardsQueryParams',
 }
 
@@ -181,6 +182,11 @@ const header = `declare module 'trello' {
         organization_pluginData?: boolean
         myPrefs?: boolean
         tags?: boolean
+    }
+
+    interface GetBoardListsQueryParams extends NestedCardQueryParams {
+        filter?: 'all' | 'closed' | 'none' | 'open'
+        fields?: string
     }
 
     interface GetMemberCardsQueryParams {
