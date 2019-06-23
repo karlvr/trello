@@ -122,6 +122,10 @@ declare module 'trello' {
         getOrgMembers(organizationId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
         getOrgMembers(organizationId: string, extraParams?: TrelloExtraParams): Promise<any>
 
+        getList(listId: string, callback: TrelloCallback<List>): void
+        getList(listId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<List>): void
+        getList(listId: string, extraParams?: TrelloExtraParams): Promise<List>
+
         getListsOnBoard(boardId: string, callback: TrelloCallback<List[]>): void
         getListsOnBoard(boardId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<List[]>): void
         getListsOnBoard(boardId: string, extraParams?: TrelloExtraParams): Promise<List[]>

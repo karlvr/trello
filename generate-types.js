@@ -44,6 +44,7 @@ const returnTypes = {
     'getBoard': 'Board',
     'getBoards': 'Board[]',
     'getCardsForList': 'Card[]',
+    'getList': 'List',
     'getListsOnBoard': 'List[]',
     'getListsOnBoardByFilter': 'List[]',
     'getOrgBoards': 'Board[]',
