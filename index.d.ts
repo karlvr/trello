@@ -77,6 +77,10 @@ declare module 'trello' {
         tags?: boolean
     }
 
+    interface GetMemberCardsQueryParams {
+        filter?: 'all' | 'closed' | 'none' | 'open' | 'visible'
+    }
+
     export default class Trello {
         constructor(key: string, token: string)
 
@@ -182,9 +186,9 @@ declare module 'trello' {
         getMember(memberId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
         getMember(memberId: string, extraParams?: TrelloExtraParams): Promise<any>
 
-        getMemberCards(memberId: string, callback: TrelloCallback<any>): void
-        getMemberCards(memberId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
-        getMemberCards(memberId: string, extraParams?: TrelloExtraParams): Promise<any>
+        getMemberCards(memberId: string, callback: TrelloCallback<Card[]>): void
+        getMemberCards(memberId: string, extraParams: GetMemberCardsQueryParams, callback: TrelloCallback<Card[]>): void
+        getMemberCards(memberId: string, extraParams?: GetMemberCardsQueryParams): Promise<Card[]>
 
         getBoardMembers(boardId: string, callback: TrelloCallback<any>): void
         getBoardMembers(boardId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void

@@ -47,12 +47,14 @@ const returnTypes = {
     'getList': 'List',
     'getListsOnBoard': 'List[]',
     'getListsOnBoardByFilter': 'List[]',
+    'getMemberCards': 'Card[]',
     'getOrgBoards': 'Board[]',
     'search': 'SearchResults',
 }
 
 const extraParamsTypes = {
     'getBoard': 'GetBoardQueryParams',
+    'getMemberCards': 'GetMemberCardsQueryParams',
 }
 
 lines
@@ -179,6 +181,10 @@ const header = `declare module 'trello' {
         organization_pluginData?: boolean
         myPrefs?: boolean
         tags?: boolean
+    }
+
+    interface GetMemberCardsQueryParams {
+        filter?: 'all' | 'closed' | 'none' | 'open' | 'visible'
     }
 
     export default class Trello {
