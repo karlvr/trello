@@ -58,6 +58,10 @@ declare module 'trello' {
         addMemberToCard(cardId: string, memberId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
         addMemberToCard(cardId: string, memberId: string, extraParams?: TrelloExtraParams): Promise<any>
 
+        getBoard(boardId: string, callback: TrelloCallback<Board>): void
+        getBoard(boardId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<Board>): void
+        getBoard(boardId: string, extraParams?: TrelloExtraParams): Promise<Board>
+
         getBoards(memberId: string, callback: TrelloCallback<Board[]>): void
         getBoards(memberId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<Board[]>): void
         getBoards(memberId: string, extraParams?: TrelloExtraParams): Promise<Board[]>

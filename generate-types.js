@@ -41,6 +41,7 @@ const paramTypes = {
 }
 
 const returnTypes = {
+    'getBoard': 'Board',
     'getBoards': 'Board[]',
     'getCardsForList': 'Card[]',
     'getListsOnBoard': 'List[]',

@@ -222,6 +222,12 @@ Trello.prototype.addMemberToCard = function (cardId, memberId, extraParamsOrCall
     return makeRequest(rest.post, this.uri + '/1/cards/' + cardId + '/members', {query: query}, callback);
 };
 
+Trello.prototype.getBoard = function(boardId, extraParamsOrCallback, callback) {
+    var query = applyExtraParams(extraParamsOrCallback, this.createQuery())
+    callback = extractCallback(extraParamsOrCallback, callback)
+    return makeRequest(rest.get, this.uri + '/1/boards/' + boardId, {query: query}, callback);
+};
+
 Trello.prototype.getBoards = function(memberId, extraParamsOrCallback, callback) {
     var query = applyExtraParams(extraParamsOrCallback, this.createQuery())
     callback = extractCallback(extraParamsOrCallback, callback)
