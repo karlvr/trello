@@ -51,6 +51,10 @@ const returnTypes = {
     'search': 'SearchResults',
 }
 
+const extraParamsTypes = {
+    'getBoard': 'GetBoardQueryParams',
+}
+
 lines
 .filter(line => line.match(/^Trello\.prototype\./))
 .filter(line => !line.match(/\b(createQuery)\b/))
@@ -84,9 +88,10 @@ lines
 
     if (hasCallback) {
         if (hasExtraParamsOrCallback) {
+            const extraParamsType = extraParamsTypes[func] || 'TrelloExtraParams'
             result.push(`        ${func}(${paramsWithTypes.join(', ')}, callback: TrelloCallback<${returnType}>): void`)
-            result.push(`        ${func}(${paramsWithTypes.join(', ')}, extraParams: TrelloExtraParams, callback: TrelloCallback<${returnType}>): void`)
-            result.push(`        ${func}(${paramsWithTypes.join(', ')}, extraParams?: TrelloExtraParams): Promise<${returnType}>`)
+            result.push(`        ${func}(${paramsWithTypes.join(', ')}, extraParams: ${extraParamsType}, callback: TrelloCallback<${returnType}>): void`)
+            result.push(`        ${func}(${paramsWithTypes.join(', ')}, extraParams?: ${extraParamsType}): Promise<${returnType}>`)
         } else {
             result.push(`        ${func}(${paramsWithTypes.join(', ')}, callback: TrelloCallback<${returnType}>): void`)
             result.push(`        ${func}(${paramsWithTypes.join(', ')}): Promise<${returnType}>`)
@@ -102,6 +107,78 @@ const header = `declare module 'trello' {
     type TrelloCallback<T> = (error: Error | null, result: T) => void
     interface TrelloExtraParams {
         [name: string]: string | number | boolean
+    }
+
+    interface NestedActionQueryParams {
+        actions_entities?: boolean
+        actions_display?: boolean
+        actions_format?: 'count' | 'list' | 'minimal'
+        actions_since?: string
+        actions_limit?: number
+        action_fields?: string
+        action_member?: boolean
+        action_member_fields?: string
+        action_memberCreator?: boolean
+        action_memberCreator_fields?: string
+    }
+
+    interface NestedCardQueryParams {
+        cards?: 'all' | 'closed' | 'none' | 'open' | 'visible'
+        card_fields?: string
+        card_members?: boolean
+        card_member_fields?: string
+        card_attachments?: true | false | 'cover'
+        card_attachment_fields?: string
+        card_stickers?: boolean
+        cards_modifiedSince?: string
+        card_customFieldItems?: boolean
+    }
+
+    interface NestedChecklistQueryParams {
+        checklists?: 'all' | 'none'
+        checklist_fields?: string
+        checkItems?: string
+        checkItem_fields?: string
+    }
+
+    interface NestedCustomFieldsQueryParams {
+        customFields?: boolean
+    }
+
+    interface NestedLabelsQueryParams {
+        labels?: 'all' | 'none'
+        label_fields?: string
+        labels_limit?: number
+    }
+
+    interface NestedListsQueryParams {
+        lists?: 'all' | 'closed' | 'none' | 'open'
+        list_fields?: string
+    }
+
+    interface NestedMembersQueryParams {
+        members?: 'none' | 'normal' | 'admins' | 'owners' | 'all'
+        member_fields?: string
+    }
+
+    interface NestedMembershipsQueryParams {
+        memberships?: 'all' | 'none'
+    }
+
+    interface NestedOrganizationQueryParams {
+        organization?: boolean
+    }
+
+    interface GetBoardQueryParams extends NestedActionQueryParams, NestedCardQueryParams, NestedChecklistQueryParams, NestedCustomFieldsQueryParams, NestedLabelsQueryParams, NestedListsQueryParams, NestedMembersQueryParams, NestedMembershipsQueryParams, NestedOrganizationQueryParams {
+        boardStars?: 'mine' | 'none'
+        card_pluginData?: boolean
+        fields?: string
+        membersInvited?: 'admins' | 'all' | 'none' | 'normal' | 'owners'
+        membersInvited_fields?: string
+        pluginData?: boolean
+        organization_pluginData?: boolean
+        myPrefs?: boolean
+        tags?: boolean
     }
 
     export default class Trello {
