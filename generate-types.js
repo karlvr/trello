@@ -211,6 +211,10 @@ const footer = `    }
         starred: boolean
         limits: any
         memberships: Membership[]
+
+        cards?: Card[]
+        labels?: Label[]
+        lists?: List[]
     }
 
     /* https://developers.trello.com/reference#list-object */
