@@ -788,6 +788,32 @@ describe('Trello', function () {
         });
     });
 
+    describe('deleteMemberFromCard', function(){
+        var del;
+
+        beforeEach(function (done) {
+            sinon.stub(restler, 'del', function (uri, options) {
+                return {once: function (event, callback) {
+                    callback(null, null);
+                }};
+            });
+
+            trello.deleteMemberFromCard('cardId', 'memberId', function () {
+                del = restler.del;
+                done();
+            });
+        });
+
+        it('should delete to https://api.trello.com/1/cards/cardId/idMembers/memberId', function () {
+            del.should.have.been.calledWith('https://api.trello.com/1/cards/cardId/idMembers/memberId');
+        });
+
+        afterEach(function () {
+            restler.del.restore();
+        });
+    });
+
+
     describe('addLabelToCard', function() {
         var query;
         var data;

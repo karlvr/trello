@@ -421,6 +421,13 @@ Trello.prototype.deleteLabel = function(labelId, extraParamsOrCallback, callback
     return makeRequest(rest.del, this.uri + '/1/labels/' + labelId, {query: query}, callback);
 };
 
+Trello.prototype.deleteMemberFromCard = function(cardId, memberId, extraParamsOrCallback, callback) {
+    var query = applyExtraParams(extraParamsOrCallback, this.createQuery())
+    callback = extractCallback(extraParamsOrCallback, callback)
+    return makeRequest(rest.del, this.uri + '/1/cards/' + cardId + '/idMembers/'+ memberId, {query: query}, callback);
+};
+
+
 Trello.prototype.addLabelToCard = function(cardId, labelId, extraParamsOrCallback, callback) {
     var query = this.createQuery();
     var data = { value: labelId };
