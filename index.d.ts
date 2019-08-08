@@ -253,6 +253,11 @@ declare module 'trello' {
         deleteLabel(labelId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
         deleteLabel(labelId: string, extraParams?: TrelloExtraParams): Promise<any>
 
+        deleteMemberFromCard(cardId: string, memberId: string, callback: TrelloCallback<any>): void
+        deleteMemberFromCard(cardId: string, memberId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
+        deleteMemberFromCard(cardId: string, memberId: string, extraParams?: TrelloExtraParams): Promise<any>
+
+
         addLabelToCard(cardId: string, labelId: string, callback: TrelloCallback<any>): void
         addLabelToCard(cardId: string, labelId: string, extraParams: TrelloExtraParams, callback: TrelloCallback<any>): void
         addLabelToCard(cardId: string, labelId: string, extraParams?: TrelloExtraParams): Promise<any>
